@@ -24,7 +24,11 @@ SECRET_KEY = 'django-insecure-%!_3bq#ju4b83)w%9&9*$9qh5%^3!+91sgaj_$d@fnqs!--crz
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+def show_toolbar(request):
+    return True
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+}
 ALLOWED_HOSTS = []
 
 
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'store',
     'tags',
     'likes',
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'storefront.urls'
@@ -79,8 +85,11 @@ WSGI_APPLICATION = 'storefront.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'storefront',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'Nopass123',
     }
 }
 
